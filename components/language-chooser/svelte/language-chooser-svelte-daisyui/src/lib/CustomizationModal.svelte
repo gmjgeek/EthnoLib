@@ -8,6 +8,7 @@
   import CustomizationForm from "./CustomizationForm.svelte";
   import type { SvelteViewModel } from "@ethnolib/state-management-svelte";
   import type { LanguageChooserViewModel } from "@ethnolib/language-chooser-controller";
+  import LL from "../i18n/i18n-svelte";
 
   let modal: HTMLDialogElement;
 
@@ -43,7 +44,7 @@
   };
 
   let title = $derived(
-    isCreatingUnlisted ? "Unlisted Language Tag" : "Custom Language Tag"
+    isCreatingUnlisted ? $LL.modal.unlistedLanguageTag() : $LL.modal.customLanguageTag()
   );
 
   function onDismiss() {
@@ -90,12 +91,12 @@
         <button
           class="btn btn-ghost"
           onclick={() => languageChooser.promptForCustomTag()}
-          >Enter Custom Tag</button
+          >{$LL.modal.enterCustomTag()}</button
         >
       </div>
       <div>
-        <button class="btn btn-primary w-24 mr-1" onclick={onOk}>Ok</button>
-        <button class="btn w-24" onclick={onDismiss}>Cancel</button>
+        <button class="btn btn-primary w-24 mr-1" onclick={onOk}>{$LL.chooser.ok()}</button>
+        <button class="btn w-24" onclick={onDismiss}>{$LL.chooser.cancel()}</button>
       </div>
     </div>
   </div>
