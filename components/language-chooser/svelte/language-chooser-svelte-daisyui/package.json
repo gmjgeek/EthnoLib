@@ -31,5 +31,8 @@
   "engines": {
     "node": ">=18.18"
   },
-  "nx": {}
+  "nx": {},
+  "dependencies": {
+    "svelte-i18n": "^4.0.1"
+  }
 }

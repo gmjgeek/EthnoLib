@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import { getAllRegions, type IRegion } from "@ethnolib/find-language";
 
   let {
@@ -36,39 +37,38 @@
 </script>
 
 <div class="card card-border border-info text-sm mb-4 p-4">
-  If you cannot find a language and it does not appear in ethnologue.com, you
-  can instead define the language here.
+  {$_("If you cannot find a language and it does not appear in ethnologue.com, you can instead define the language here.")}
 </div>
 
 <div class="mb-4">
   <label>
-    <span class="font-semibold opacity-70">Name</span>
+    <span class="font-semibold opacity-70">{$_("Name")}</span>
     <input
       class="input w-full"
       class:input-error={isNameInvalid}
       bind:value={name}
     />
     {#if isNameInvalid}
-      <p class="text-sm text-error">Required</p>
+      <p class="text-sm text-error">{$_("required")}</p>
     {/if}
   </label>
 </div>
 
 <div class="mb-4">
   <label>
-    <span class="font-semibold opacity-70">Country</span>
+    <span class="font-semibold opacity-70">{$_("Country")}</span>
     <select
       class="select w-full"
       class:select-error={isRegionInvalid}
       bind:value={regionCode}
     >
-      <option disabled selected value="">Select a country</option>
+      <option disabled selected value="">{$_("Select a country")}</option>
       {#each regions as region}
         <option value={region.code}>{region.name}</option>
       {/each}
     </select>
     {#if isRegionInvalid}
-      <p class="text-sm text-error">Required</p>
+      <p class="text-sm text-error">{$_("required")}</p>
     {/if}
   </label>
 </div>

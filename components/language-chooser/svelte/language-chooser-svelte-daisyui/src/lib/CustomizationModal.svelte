@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import {
     isValidBcp47Tag,
     type IRegion,
@@ -43,7 +44,7 @@
   };
 
   let title = $derived(
-    isCreatingUnlisted ? "Unlisted Language Tag" : "Custom Language Tag"
+    isCreatingUnlisted ? $_("Unlisted Language Tag") : $_("Custom Language Tag")
   );
 
   function onDismiss() {
@@ -90,12 +91,12 @@
         <button
           class="btn btn-ghost"
           onclick={() => languageChooser.promptForCustomTag()}
-          >Enter Custom Tag</button
+          >{$_("Enter Custom Tag")}</button
         >
       </div>
       <div>
-        <button class="btn btn-primary w-24 mr-1" onclick={onOk}>Ok</button>
-        <button class="btn w-24" onclick={onDismiss}>Cancel</button>
+        <button class="btn btn-primary w-24 mr-1" onclick={onOk}>{$_("OK")}</button>
+        <button class="btn w-24" onclick={onDismiss}>{$_("Cancel")}</button>
       </div>
     </div>
   </div>
