@@ -17,6 +17,12 @@
   let interfaceLanguage = $state("en");
 
   async function changeInterfaceLanguage(lang: string) {
+    // Validate language code against available locales to prevent path traversal
+    if (!availableLocales.includes(lang)) {
+      console.error(`Invalid locale: ${lang}`);
+      return;
+    }
+    
     try {
       const { messages } = await import(
         `../../../../locales/${lang}/messages.ts`

@@ -8,6 +8,12 @@ import availableLocales from "../../../../available-locales.json";
 export async function initI18n(locale: string) {
   let targetLocale = getBestAvailableLocale(locale);
 
+  // Additional validation: ensure targetLocale is in availableLocales list
+  if (!availableLocales.includes(targetLocale)) {
+    console.error(`Invalid locale after validation: ${targetLocale}`);
+    targetLocale = "en";
+  }
+
   try {
     const { messages } = await import(
       `../../../../locales/${targetLocale}/messages.ts`
