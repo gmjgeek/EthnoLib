@@ -56,8 +56,12 @@ for (const locale of availableLocales) {
       const entry = translations_obj[key];
       // Use msgid as key and msgstr as value
       // For svelte-i18n, we need the actual translation string
+      // If msgstr is empty, use msgid as fallback
       if (entry.msgstr && entry.msgstr[0]) {
         translations[key] = entry.msgstr[0];
+      } else if (key) {
+        // Fallback to msgid if no translation is available
+        translations[key] = key;
       }
     }
 
