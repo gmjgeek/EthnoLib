@@ -15,6 +15,7 @@
   "scripts": {
     "l10n:extract": "lingui extract",
     "l10n:compile": "lingui compile",
+    "l10n:po-to-json": "ts-node scripts/po-to-json.ts",
     "l10n:upload": "crowdin upload sources",
     "l10n:download": "crowdin download",
     "l10n:update-locales": "ts-node scripts/update-locales.ts",
@@ -48,6 +49,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
+    "gettext-parser": "^8.0.0",
     "nx": "20.4.6",
     "prettier": "^3.3.3",
     "ts-node": "10.9.1",

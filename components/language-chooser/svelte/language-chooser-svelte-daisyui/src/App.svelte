@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { locale, _ } from "svelte-i18n";
+  import { availableLocales } from "./lib/i18n";
   import "./app.css";
   import LanguageChooser from "./lib/LanguageChooser.svelte";
   import LanguageChooserModal from "./lib/LanguageChooserModal.svelte";
@@ -8,9 +10,17 @@
     type IOrthography,
   } from "@ethnolib/find-language";
 
+  let { uiLanguage = $bindable('en') }: { uiLanguage?: string } = $props();
   let showModal = $state(() => {});
   let orthography: IOrthography = $state({});
   let languageTag: string | undefined = $state();
+  
+  // Update i18n locale when uiLanguage changes
+  $effect(() => {
+    if (uiLanguage) {
+      locale.set(uiLanguage);
+    }
+  });
 </script>
 
 <main>
@@ -38,6 +48,15 @@
         >
       </div>
       <div class="flex-1">
+        <h3 class="mb-2">Interface Language:</h3>
+        <label class="form-control w-full max-w-xs mb-4">
+          <select class="select select-bordered" bind:value={uiLanguage}>
+            {#each availableLocales as localeCode}
+              <option value={localeCode}>{localeCode}</option>
+            {/each}
+          </select>
+        </label>
+        
         <h3>Choose Theme:</h3>
         <fieldset class="fieldset">
           <label class="flex gap-2 cursor-pointer items-center">
