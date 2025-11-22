@@ -5,6 +5,7 @@
     type IRegion,
     getAllScripts,
   } from "@ethnolib/find-language";
+  import { t } from "svelte-i18n-lingui";
 
   let {
     populate = $bindable(),
@@ -41,13 +42,12 @@
 </script>
 
 <div class="card card-border border-info text-sm mb-4 p-4">
-  If you found the main language but need to change some of the specifics like
-  Script or Dialect, you can do that here.
+  {$t`If you found the main language but need to change some of the specifics like Script or Dialect, you can do that here.`}
 </div>
 
 <div class="mb-4">
   <label>
-    <span class="font-semibold opacity-70">Script</span>
+    <span class="font-semibold opacity-70">{$t`Script`}</span>
     <select class="select w-full" bind:value={scriptCode}>
       <option selected value=""></option>
       {#each scripts as script}
@@ -59,7 +59,7 @@
 
 <div class="mb-4">
   <label>
-    <span class="font-semibold opacity-70">Country</span>
+    <span class="font-semibold opacity-70">{$t`Country`}</span>
     <select class="select w-full" bind:value={regionCode}>
       <option selected value=""></option>
       {#each regions as region}
@@ -71,7 +71,7 @@
 
 <div class="mb-4">
   <label>
-    <span class="font-semibold opacity-70">Variant (dialect)</span>
+    <span class="font-semibold opacity-70">{$t`Variant (dialect)`}</span>
     <input class="input w-full" bind:value={name} />
   </label>
 </div>

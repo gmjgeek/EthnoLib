@@ -12,7 +12,15 @@ export default defineConfig({
 
   plugins: [
     nxViteTsPaths(),
-    svelte(),
+    svelte({
+      dynamicCompileOptions({ filename }) {
+        // Use runes mode for project files, but not for node_modules
+        if (filename?.includes("node_modules")) {
+          return { runes: undefined };
+        }
+        return { runes: true };
+      },
+    }),
     dts({
       entryRoot: ".",
       tsconfigPath: path.join(__dirname, "tsconfig.lib.json"),

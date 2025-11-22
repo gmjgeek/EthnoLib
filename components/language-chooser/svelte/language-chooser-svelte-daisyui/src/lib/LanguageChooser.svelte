@@ -11,6 +11,7 @@
   import { svelteViewModel } from "@ethnolib/state-management-svelte";
   import CustomizationModal from "./CustomizationModal.svelte";
   import { tick } from "svelte";
+  import { t } from "svelte-i18n-lingui";
 
   const {
     onDismiss,
@@ -35,11 +36,11 @@
 
   viewModel.promptForCustomTag = (_default?: string) => {
     const tag = window.prompt(
-      "If this user interface is not offering you a language tag that you know is valid ISO 639 code, you can enter it here:",
+      $t`If this user interface is not offering you a language tag that you know is valid ISO 639 code, you can enter it here:`,
       _default
     );
     if (tag && !isValidBcp47Tag(tag)) {
-      alert(`This is not in a valid IETF BCP 47 format: ${tag}`);
+      alert($t`This is not in a valid IETF BCP 47 format: ${tag}`);
     } else if (tag) {
       viewModel.customLanguageTag = tag;
       closeModal();
@@ -72,7 +73,7 @@
 
 <div class="h-full flex flex-col">
   <h3 class="text-3xl p-4 border-b-2 border-base-300 flex-none">
-    Choose Language
+    {$t`Choose Language`}
   </h3>
 
   <div class="flex flex-1 min-h-0">
@@ -82,7 +83,7 @@
           <SearchIcon />
           <input
             type="search"
-            placeholder="Search by name, code, or country"
+            placeholder={$t`Search by name, code, or country`}
             bind:value={viewModel.searchString}
           />
         </label>
@@ -100,7 +101,7 @@
           {#if lang.isSelected && viewModel.listedScripts.length > 0}
             <div class="ml-8 mb-4">
               <div class="py-2">
-                <p class="font-semibold text-sm">Select a script:</p>
+                <p class="font-semibold text-sm">{$t`Select a script`}:</p>
               </div>
               <div class="grid grid-cols-3 gap-4">
                 {#each viewModel.listedScripts.map(svelteViewModel) as script}
@@ -122,11 +123,11 @@
           >
             <p class="card-title uppercase">
               {#if viewModel.customLanguageTag}
-                Edit Language Tag
+                {$t`Edit Language Tag`}
               {:else if viewModel.selectedLanguage}
-                Customize
+                {$t`Customize`}
               {:else}
-                Unlisted Language
+                {$t`Create Unlisted Language`}
               {/if}
             </p>
             <div class="flex">
@@ -145,7 +146,7 @@
         {#if viewModel.selectedLanguage}
           <label>
             <span class="font-semibold opacity-70"
-              >Display this language this way</span
+              >{$t`Display this language this way`}</span
             >
             <input
               class="input input-xl w-full"
@@ -160,10 +161,10 @@
           <button
             class="btn btn-primary uppercase w-24 mx-1"
             disabled={!viewModel.isReadyToSubmit}
-            onclick={() => onOk(orthography, languageTag)}>Ok</button
+            onclick={() => onOk(orthography, languageTag)}>{$t`OK`}</button
           >
           <button class="btn uppercase w-24 mx-1" onclick={onDismiss}
-            >Cancel</button
+            >{$t`Cancel`}</button
           >
         </div>
       </div>

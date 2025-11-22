@@ -1,4 +1,5 @@
 import availableLocales from "./available-locales.json" with { type: "json" };
+import { jstsExtractor, svelteExtractor } from "svelte-i18n-lingui/extractor";
 
 module.exports = {
   locales: availableLocales,
@@ -22,6 +23,7 @@ module.exports = {
       ],
     },
   ],
+  extractors: [jstsExtractor, svelteExtractor],
   format: "po",
   sourceLocale: "en",
   orderBy: "messageId",
